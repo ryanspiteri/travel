@@ -1,228 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Planning Tracker</title>
+    <title>Holiday Planner</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-        
-        .title {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .trip-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .input-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .input-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #555;
-        }
-        
-        .input-group input, .input-group textarea {
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .input-group input:focus, .input-group textarea:focus {
-            outline: none;
-            border-color: #4f46e5;
-        }
-        
-        .budget-summary {
-            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
-            border: 2px solid #4caf50;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        
-        .budget-title {
-            font-size: 1.5rem;
-            color: #2e7d32;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .budget-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            text-align: center;
-        }
-        
-        .budget-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .budget-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .budget-amount {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2e7d32;
-        }
-        
-        .destination-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 25px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .destination-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .destination-title {
-            font-size: 1.3rem;
-            color: #333;
-        }
-        
-        .delete-btn {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-        
-        .delete-btn:hover {
-            background: #d32f2f;
-        }
-        
-        .section {
-            margin-bottom: 25px;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        
-        .flight-section {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-left: 4px solid #2196f3;
-        }
-        
-        .hotel-section {
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-            border-left: 4px solid #9c27b0;
-        }
-        
-        .transport-section {
-            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
-            border-left: 4px solid #4caf50;
-        }
-        
-        .events-section {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            border-left: 4px solid #f44336;
-        }
-        
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .btn {
-            background: #4f46e5;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-        }
-        
-        .btn:hover {
-            background: #3730a3;
-        }
-        
-        .btn-center {
-            display: block;
-            margin: 30px auto;
-            max-width: 300px;
-        }
-        
-        .total-budget {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2e7d32;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .add-destination-section {
-            text-align: center;
-            margin: 30px 0;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f0f8ff; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .title { text-align: center; color: #333; margin-bottom: 20px; }
+        .trip-info { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .input-group { display: flex; flex-direction: column; }
+        .input-group label { font-weight: bold; margin-bottom: 5px; color: #555; }
+        .input-group input, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; }
+        .budget { background: #e8f5e8; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .budget-total { font-size: 24px; font-weight: bold; color: #2e7d32; margin: 10px 0; }
+        .budget-breakdown { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .budget-item { background: white; padding: 10px; border-radius: 5px; }
+        .destination { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; }
+        .dest-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .delete-btn { background: #f44336; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .section { margin: 20px 0; padding: 15px; border-radius: 5px; }
+        .flight { background: #e3f2fd; }
+        .hotel { background: #f3e5f5; }
+        .transport { background: #e8f5e8; }
+        .events { background: #ffebee; }
+        .section h4 { margin: 0 0 10px 0; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px; }
+        .btn { background: #4f46e5; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; display: block; margin: 20px auto; }
+        .btn:hover { background: #3730a3; }
     </style>
 </head>
 <body>
@@ -232,76 +37,68 @@
             
             <div class="trip-info">
                 <div class="input-group">
-                    <label for="tripName">Trip Name</label>
-                    <input type="text" id="tripName" value="Europe Adventure" onchange="updateBudget()">
+                    <label>Trip Name</label>
+                    <input type="text" id="tripName" value="Europe Adventure">
                 </div>
                 <div class="input-group">
-                    <label for="startDate">Start Date</label>
+                    <label>Start Date</label>
                     <input type="date" id="startDate" value="2026-07-23">
                 </div>
                 <div class="input-group">
-                    <label for="endDate">End Date</label>
+                    <label>End Date</label>
                     <input type="date" id="endDate" value="2026-07-30">
                 </div>
             </div>
             
-            <div class="budget-summary">
-                <h3 class="budget-title">💰 Budget Summary</h3>
-                <div class="total-budget" id="totalBudget">$0</div>
-                <div class="budget-grid">
+            <div class="budget">
+                <h3>💰 Budget Summary</h3>
+                <div class="budget-total" id="totalBudget">$0</div>
+                <div class="budget-breakdown">
                     <div class="budget-item">
-                        <div class="budget-label">Flights</div>
-                        <div class="budget-amount" id="flightTotal">$0</div>
+                        <div>Flights</div>
+                        <strong id="flightTotal">$0</strong>
                     </div>
                     <div class="budget-item">
-                        <div class="budget-label">Hotels</div>
-                        <div class="budget-amount" id="hotelTotal">$0</div>
+                        <div>Hotels</div>
+                        <strong id="hotelTotal">$0</strong>
                     </div>
                     <div class="budget-item">
-                        <div class="budget-label">Transport</div>
-                        <div class="budget-amount" id="transportTotal">$0</div>
+                        <div>Transport</div>
+                        <strong id="transportTotal">$0</strong>
                     </div>
                     <div class="budget-item">
-                        <div class="budget-label">Events</div>
-                        <div class="budget-amount" id="eventsTotal">$0</div>
+                        <div>Events</div>
+                        <strong id="eventsTotal">$0</strong>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="destinationsContainer">
-            <!-- Destinations will be added here -->
-        </div>
+        <div id="destinations"></div>
 
-        <div class="add-destination-section">
-            <button class="btn btn-center" onclick="addDestination()">
-                ➕ Add New Destination
-            </button>
-        </div>
+        <button class="btn" onclick="addDestination()">➕ Add New Destination</button>
     </div>
 
     <script>
-        let destinationCount = 0;
+        let destCount = 0;
 
         function addDestination(country = '', city = '') {
-            destinationCount++;
-            const container = document.getElementById('destinationsContainer');
-            
-            const destinationHTML = `
-                <div class="destination-card" id="destination-${destinationCount}">
-                    <div class="destination-header">
-                        <h2 class="destination-title">📍 Destination ${destinationCount}: ${city || 'New Destination'}${country ? ', ' + country : ''}</h2>
-                        <button class="delete-btn" onclick="removeDestination(${destinationCount})">🗑️ Delete</button>
+            destCount++;
+            const html = `
+                <div class="destination" id="dest${destCount}">
+                    <div class="dest-header">
+                        <h3>📍 Destination ${destCount}: ${city || 'New Destination'}${country ? ', ' + country : ''}</h3>
+                        <button class="delete-btn" onclick="removeDest(${destCount})">Delete</button>
                     </div>
                     
-                    <div class="trip-info">
+                    <div class="grid-4">
                         <div class="input-group">
                             <label>Country</label>
-                            <input type="text" value="${country}" onchange="updateDestinationTitle(${destinationCount})" data-field="country">
+                            <input type="text" value="${country}" onchange="updateTitle(${destCount})" data-type="country">
                         </div>
                         <div class="input-group">
                             <label>City</label>
-                            <input type="text" value="${city}" onchange="updateDestinationTitle(${destinationCount})" data-field="city">
+                            <input type="text" value="${city}" onchange="updateTitle(${destCount})" data-type="city">
                         </div>
                         <div class="input-group">
                             <label>Departure Date</label>
@@ -313,9 +110,9 @@
                         </div>
                     </div>
                     
-                    <div class="section flight-section">
-                        <h3 class="section-title">✈️ Flight Details</h3>
-                        <div class="grid">
+                    <div class="section flight">
+                        <h4>✈️ Flight Details</h4>
+                        <div class="grid-4">
                             <div class="input-group">
                                 <label>Arrival Date</label>
                                 <input type="date">
@@ -335,8 +132,8 @@
                         </div>
                     </div>
                     
-                    <div class="section hotel-section">
-                        <h3 class="section-title">🏨 Accommodation</h3>
+                    <div class="section hotel">
+                        <h4>🏨 Accommodation</h4>
                         <div class="grid">
                             <div class="input-group">
                                 <label>Hotel/Accommodation</label>
@@ -349,8 +146,8 @@
                         </div>
                     </div>
                     
-                    <div class="section transport-section">
-                        <h3 class="section-title">🚗 Local Transport</h3>
+                    <div class="section transport">
+                        <h4>🚗 Local Transport</h4>
                         <div class="grid">
                             <div class="input-group">
                                 <label>Transport Type</label>
@@ -363,8 +160,8 @@
                         </div>
                     </div>
                     
-                    <div class="section events-section">
-                        <h3 class="section-title">🎭 Events & Activities</h3>
+                    <div class="section events">
+                        <h4>🎭 Events & Activities</h4>
                         <div class="grid">
                             <div class="input-group">
                                 <label>Events/Activities</label>
@@ -379,90 +176,63 @@
                     
                     <div class="input-group">
                         <label>Notes</label>
-                        <textarea rows="3" placeholder="Add any additional notes, reminders, or important information..."></textarea>
+                        <textarea rows="3" placeholder="Add any additional notes..."></textarea>
                     </div>
                 </div>
             `;
             
-            container.insertAdjacentHTML('beforeend', destinationHTML);
+            document.getElementById('destinations').insertAdjacentHTML('beforeend', html);
             updateBudget();
         }
 
-        function removeDestination(id) {
-            const destination = document.getElementById(`destination-${id}`);
-            if (destination) {
-                destination.remove();
-                updateBudget();
-            }
+        function removeDest(id) {
+            document.getElementById('dest' + id).remove();
+            updateBudget();
         }
 
-        function updateDestinationTitle(id) {
-            const destination = document.getElementById(`destination-${id}`);
-            const countryInput = destination.querySelector('[data-field="country"]');
-            const cityInput = destination.querySelector('[data-field="city"]');
-            const titleElement = destination.querySelector('.destination-title');
+        function updateTitle(id) {
+            const dest = document.getElementById('dest' + id);
+            const country = dest.querySelector('[data-type="country"]').value;
+            const city = dest.querySelector('[data-type="city"]').value;
+            const title = dest.querySelector('h3');
             
-            const country = countryInput.value;
-            const city = cityInput.value;
-            const destinationNumber = id;
-            
-            let titleText = `📍 Destination ${destinationNumber}:`;
+            let text = `📍 Destination ${id}:`;
             if (city || country) {
-                titleText += ` ${city || 'New Destination'}`;
-                if (country && city) {
-                    titleText += `, ${country}`;
-                } else if (country && !city) {
-                    titleText = `📍 Destination ${destinationNumber}: ${country}`;
-                }
+                text += ` ${city || 'New Destination'}`;
+                if (country && city) text += `, ${country}`;
+                else if (country && !city) text = `📍 Destination ${id}: ${country}`;
             } else {
-                titleText += ' New Destination';
+                text += ' New Destination';
             }
-            
-            titleElement.textContent = titleText;
+            title.textContent = text;
         }
 
         function updateBudget() {
-            let flightTotal = 0;
-            let hotelTotal = 0;
-            let transportTotal = 0;
-            let eventsTotal = 0;
+            let flights = 0, hotels = 0, transport = 0, events = 0;
 
-            // Calculate flight costs
             document.querySelectorAll('.flight-cost').forEach(input => {
-                flightTotal += parseFloat(input.value) || 0;
+                flights += parseFloat(input.value) || 0;
             });
-
-            // Calculate hotel costs
             document.querySelectorAll('.hotel-cost').forEach(input => {
-                hotelTotal += parseFloat(input.value) || 0;
+                hotels += parseFloat(input.value) || 0;
             });
-
-            // Calculate transport costs
             document.querySelectorAll('.transport-cost').forEach(input => {
-                transportTotal += parseFloat(input.value) || 0;
+                transport += parseFloat(input.value) || 0;
             });
-
-            // Calculate events costs
             document.querySelectorAll('.events-cost').forEach(input => {
-                eventsTotal += parseFloat(input.value) || 0;
+                events += parseFloat(input.value) || 0;
             });
 
-            // Update display
-            document.getElementById('flightTotal').textContent = '$' + flightTotal.toLocaleString();
-            document.getElementById('hotelTotal').textContent = '$' + hotelTotal.toLocaleString();
-            document.getElementById('transportTotal').textContent = '$' + transportTotal.toLocaleString();
-            document.getElementById('eventsTotal').textContent = '$' + eventsTotal.toLocaleString();
-            
-            const grandTotal = flightTotal + hotelTotal + transportTotal + eventsTotal;
-            document.getElementById('totalBudget').textContent = '$' + grandTotal.toLocaleString();
+            document.getElementById('flightTotal').textContent = '$' + flights.toLocaleString();
+            document.getElementById('hotelTotal').textContent = '$' + hotels.toLocaleString();
+            document.getElementById('transportTotal').textContent = '$' + transport.toLocaleString();
+            document.getElementById('eventsTotal').textContent = '$' + events.toLocaleString();
+            document.getElementById('totalBudget').textContent = '$' + (flights + hotels + transport + events).toLocaleString();
         }
 
-        // Initialize with your existing destinations
+        // Start with your destinations
         addDestination('Germany', 'Frankfurt');
         addDestination('Netherlands', 'Amsterdam');
-        
-        // Initialize budget calculation
-        updateBudget();
     </script>
 </body>
 </html>
